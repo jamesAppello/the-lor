@@ -5,7 +5,7 @@ const axios = require("axios");
 const inquirer = require("inquirer");
 const fs = require("fs");
 // child_imports || HELPERS
-// const { shuffle } = require('./helper');
+
 // CLI-ARGS
 const argOne = process.argv[2];
 const argTwo = process.argv[3];
@@ -14,6 +14,7 @@ const argTwo = process.argv[3];
 const alpha = require("alphavantage")({
   key: process.env.ALPHAVANTAGE_API_KEY
 });
+
 
 /**
  * GIVENS:
@@ -52,6 +53,7 @@ const alpha = require("alphavantage")({
  * }
  */
 
+
 // MAIN
 // I::>
 // define method
@@ -65,19 +67,23 @@ const runApp = function(action, query) {
       break;
 
     case "hash-this-string":
-      console.log("PASSWORD_GENERATOR_METHOD\n" + query);
-       
+      console.log("PASSWORD_GENERATOR_METHOD\n\n----OLD_PASSWORD----\n" + query);
         var a = query.split(""),
-          n = a.length;
-
-        for (var i = n - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
+        n = a.length;
+        for (var i = n - 3; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1 * 1.618 -2/3 *5));
           var tmp = a[i];
           a[i] = a[j];
           a[j] = tmp;
-          console.log(a.join(""));
+          var list = a.join("")
+          // console.log(list);
         // @ this point it prints out a different shuffle per iteration.....
         // I think this is even better of an outcome than i expected!
+        let holder = [];
+        holder.push(list)
+
+        console.log(`====================\n----NEW_PASSWORD----\n${holder}`);
+        return holder
         }
       break;
 
