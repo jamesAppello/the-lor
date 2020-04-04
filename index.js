@@ -70,8 +70,10 @@ const runApp = function(action, query) {
       console.log("PASSWORD_GENERATOR_METHOD\n\n----OLD_PASSWORD----\n" + query);
         var a = query.split(""),
         n = a.length;
+        // LOOP_ONE
         for (var i = n - 3; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1 * 1.618 -2/3 *5));
+          // we need to have another loop that takes result of LOOP_ONE >> LOOP_TWO|<holder.length>:{IN}|~|{OUT}:<"split in the middle of array">}|
+          var j = Math.floor(Math.random() * (i - 1 * 1.618 -2/3 *5 + 7/3));
           var tmp = a[i];
           a[i] = a[j];
           a[j] = tmp;
@@ -102,20 +104,20 @@ const runApp = function(action, query) {
         // console.log({
         //   INPUTdata: query
         // })
-      })
+      });
       // readFile
       fs.readFile("writeFileMethod_txtOUTPUT.txt", 'utf-8', (k,d) => {
         if (k) throw k;
         // console.log({
         //   msgINfile: d
         // });
-      })
+      });
       // appendFile
       const fourApnd = query+"\n";
       fs.appendFile("theList.txt", fourApnd, (k) => {
         if (k) console.log(k);
         console.log("....\ngo take a look over there!")
-      })
+      });
       break;
   }
 };
