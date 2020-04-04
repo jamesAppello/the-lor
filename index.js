@@ -89,6 +89,33 @@ const runApp = function(action, query) {
 
     case "ef-es":
       console.log("CRUD_FILE-SYSTEM_METHOD");
+      // writeFile
+      fs.writeFile("writeFileMethod_txtOUTPUT.txt", query, (k) => {
+        if (k) {
+          console.log({
+            YOU: "yes you.",
+            ERROR: true,
+            ERROR_MESSAGE:"Either you forgot to wrap your message with \"quotation marks\"\nOr I messed up somehwere..."
+          });
+          return k
+        }
+        // console.log({
+        //   INPUTdata: query
+        // })
+      })
+      // readFile
+      fs.readFile("writeFileMethod_txtOUTPUT.txt", 'utf-8', (k,d) => {
+        if (k) throw k;
+        // console.log({
+        //   msgINfile: d
+        // });
+      })
+      // appendFile
+      const fourApnd = query+"\n";
+      fs.appendFile("theList.txt", fourApnd, (k) => {
+        if (k) console.log(k);
+        console.log("....\ngo take a look over there!")
+      })
       break;
   }
 };

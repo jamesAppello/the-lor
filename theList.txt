@@ -1,0 +1,3 @@
+This is the first message Hello_WORLD!
+Ok so now I have the initial input query in one file, this function reads THAT file and also appends the query to ANOTHER file
+THIS IS ACTUALLY REALLY COOL! AND A LOT CAN BE DONE IN THE MIX OF THIS!
