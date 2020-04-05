@@ -12,9 +12,8 @@ const argTwo = process.argv[3];
 
 //API DOCS: " Your api key will be visable in the network traffic, ths sould not be used for public projects "
 const alpha = require("alphavantage")({
-  key: process.env.ALPHAVANTAGE_API_KEY
+  key: process.env.ALPHAVANTAGE_API_KEY,
 });
-
 
 /**
  * GIVENS:
@@ -34,59 +33,61 @@ const alpha = require("alphavantage")({
  * @-the MAIN:<:< function (action, query){
  * SWITCH<~>action
  *      1~>>> look up stock data << "get-stock-data"
- *  > GOT API KEY < *check/|
- *  > now place method inside of its case and attach the query to the cb('VALUE')
- * >>WORKS>>> 4|4/2/2020|18:06|>>>>>>>>|||||||||
  * ===================================================~~~~~~~~~~~~~~~
  *      2~>>> password-hasher-generator << "hash-this-string"
- * // take input string,
- * generate input (n)
- * => return (n*phi) * (random number picked from range 0 to 1618)^e(Pi)
- * ....then cos(result) then cot(cos_res)
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *      3~>>> fs-module-method to create/read/delete file << "ef-es"
- * // write-new-text << "users message string concatenated into a new file" && allow overrite if wanted
- * // read-file
- * // append-file << add to present file >> 'list' || data
- * ========================================================
- * ELSE => just add the node spotify api too to whatever else i get to work as an EXTRA cherry on top...OMDB too while im at it.
+ * ==================================================================
  * }
  */
-
 
 // MAIN
 // I::>
 // define method
-const runApp = function(action, query) {
+const runApp = function (action, query) {
   switch (action) {
     case "get-stock-data":
       console.log("STOCK_METHOD\n" + query);
-      alpha.data.intraday(query).then(stockData => {
+      alpha.data.intraday(query).then((stockData) => {
         console.log(stockData);
       });
       break;
 
     case "hash-this-string":
-      console.log("PASSWORD_GENERATOR_METHOD\n\n----OLD_PASSWORD----\n" + query);
-        var a = query.split(""),
+      console.log(
+        "PASSWORD_GENERATOR_METHOD\n\n----OLD_PASSWORD----\n" + query
+      );
+      var a = query.split(""),
         n = a.length;
-        // LOOP_ONE
-        for (var i = n - 3; i > 0; i--) {
-          // we need to have another loop that takes result of LOOP_ONE >> LOOP_TWO|<holder.length>:{IN}|~|{OUT}:<"split in the middle of array">}|
-          var j = Math.floor(Math.random() * (i - 1 * 1.618 -2/3 *5 + 7/3));
+      // LOOP_ONE
+      for (var i = n - 3; i > 0; i--) {
+        var j = Math.floor(
+          Math.random() *
+          (i - 1 * 1.618 - (2 / 3) * 5 + (7 / 3) * Math.cos(i) + Math.sin(i))
+          );
           var tmp = a[i];
           a[i] = a[j];
           a[j] = tmp;
-          var list = a.join("")
-          // console.log(list);
-        // @ this point it prints out a different shuffle per iteration.....
-        // I think this is even better of an outcome than i expected!
-        let holder = [];
-        holder.push(list)
-
-        console.log(`====================\n----NEW_PASSWORD----\n${holder}`);
-        return holder
+          var list = a.join("");
+          
+          let holder = [];
+          holder.push(list);
+          
+          console.log(`====================\n----NEW_PASSWORD----\n${holder}`);
+          // we need to have another loop that takes result of LOOP_ONE >> LOOP_TWO|<holder.length>:{IN}|~|{OUT}:<"shuffle again">}|
+        for (let g = holder.length - 3; g > 0; i--) {
+          var newJay = Math.floor(
+            Math.random() *
+              (g - 2 * Math.PI - ((2 * Math.PI) / 3) * 2.17 * (g - 5))
+          );
+          var thisTemp = b[g];
+          a[g] = a[newJay];
+          a[newJay] = thisTemp;
+          thisTemp.slice((thisTemp.length / 2) * (1.27 - 1.618)[i-g*2]);
+          // TODO: ADD A REG-EX HERE TO DO MORE SPECIFIC STUFF...do inquirer first
         }
+        return holder;
+      }
       break;
 
     case "ef-es":
@@ -97,26 +98,27 @@ const runApp = function(action, query) {
           console.log({
             YOU: "yes you.",
             ERROR: true,
-            ERROR_MESSAGE:"Either you forgot to wrap your message with \"quotation marks\"\nOr I messed up somehwere..."
+            ERROR_MESSAGE:
+              'Either you forgot to wrap your message with "quotation marks"\nOr I messed up somehwere...',
           });
-          return k
+          return k;
         }
         // console.log({
         //   INPUTdata: query
         // })
       });
       // readFile
-      fs.readFile("writeFileMethod_txtOUTPUT.txt", 'utf-8', (k,d) => {
+      fs.readFile("writeFileMethod_txtOUTPUT.txt", "utf-8", (k, d) => {
         if (k) throw k;
         // console.log({
         //   msgINfile: d
         // });
       });
       // appendFile
-      const fourApnd = query+"\n";
+      const fourApnd = query + "\n";
       fs.appendFile("theList.txt", fourApnd, (k) => {
         if (k) console.log(k);
-        console.log("....\ngo take a look over there!")
+        console.log("....\ngo take a look over there!");
       });
       break;
   }
