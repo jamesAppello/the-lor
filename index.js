@@ -41,6 +41,79 @@ const alpha = require("alphavantage")({
  * }
  */
 
+
+inquirer.prompt({
+  name:"welcome",
+  type:"list",
+  message:"Welcome to The Lor!\n...\nWHAT COULD I DO FOR YOU TODAY?",
+  choices:["get-stock-data", "hash-this-string", "ef-es"]
+}).then(ans => {
+  console.log(ans);
+  /**
+   * TODO:
+   * 1. pass the result of the welcome as argONE
+   * *********
+   * 2. depending on THAT_OUTOME << exec << {
+   *     MESSAGE_TWO_STK -> stock data method
+   *     MESSAGE_TWO_PWD -> password shuffle method
+   *     MESSAGE_TWO_FS -> fs method
+   *        *\_FS_MESSAGE << "what do you want to do?" << {
+   *             ?->"write something to share it can be anything and it will be left safe in a C_E" << WRITE-FILE
+   *             ?->"Got stuff to do? Make a list! (get a watch and make a lap every time your attention shifts...the idea is to get you back on track!)"
+   *             ?->"Read the list you made!"
+   *   }
+   * }
+   */
+  let inqCHOICE, inqACTION;
+  switch (ans.welcome) {
+    case "get-stock-data":
+      // console.log("stocks");
+      inqCHOICE = "get-stock-data";
+      console.log(inqCHOICE)
+      // IF true: ask another question to instruct user to input the company ticker symbol
+      inquirer.prompt({
+        name: "msg2stk",
+        message: "Enter the ticker-symbol of the company..."
+      }).then(ansTWO => {
+        // console.log(ansTWO.msg2stk);
+        inqACTION = ansTWO.msg2stk;
+        runApp(inqCHOICE, inqACTION)
+      }).catch(err => {
+        if (err) throw err;
+      })
+      
+      // runApp(inqCHOICE, inqACTION);
+      break;
+    case "hash-this-string":
+      // console.log("password-shuffler");
+      inqCHOICE = "hash-this-string"
+      console.log(inqCHOICE)
+      inquirer.prompt({
+        name: "shuffle",
+        message: "All this will do is shuffle your password you already use,\nfor the use of making YOUR unique password a little extra harder to crack!"
+      }).then(ansTWO => {
+        inqACTION = ansTWO.shuffle;
+        runApp(inqCHOICE, inqACTION);
+      }).catch(err => {
+        if (err) throw err;
+      });
+      break;
+    case "ef-es":
+      // console.log("CRUD-file");
+      inqCHOICE = "ef-es"
+      console.log(inqCHOICE)
+      inquirer.prompt({
+        name:"crud",
+        type: "list",
+        choices: ["Write a message!", "Make a List", "Read the list!"]
+      }).then(ansTWO => {
+        inqACTION = ansTWO.crud;
+        runApp(inqCHOICE, inqACTION);
+      });
+      break;    
+  }
+})
+
 // MAIN
 // I::>
 // define method
@@ -61,7 +134,7 @@ const runApp = function (action, query) {
         n = a.length;
       // LOOP_ONE
       for (var i = n - 3; i > 0; i--) {
-        var j = Math.floor(Math.random()*(i - 1 * 1.618 - (2 / 3) * 5 + (7 / 3) * Math.cos(i)));
+        var j = Math.floor(Math.random()*(i - 1 * 1.618 - (2 / 3) * 5 + (7 / 3)));
           var tmp = a[i];
           a[i] = a[j];
           a[j] = tmp;
@@ -75,7 +148,7 @@ const runApp = function (action, query) {
         for (let g = holder.length - 3; g > 0; i--) {
           var newJay = Math.floor(
             Math.random() *
-              (g - 2 * Math.PI - ((2 * Math.PI) / 3) * 2.17 * (g - 5))
+              (g - 2 * Math.PI - ((2 * Math.PI) / 16) * 2.17 * (g - 5))
           );
           var thisTemp = b[g];
           a[g] = a[newJay];
@@ -127,7 +200,7 @@ runApp(argOne, argTwo);
 
 /**
  *
- * WHEN THIS ALL RUNS PERFECTLY THEN TRANSFORM THIS USING THE INQUIRER PACKAGE
+ * WHEN THIS ALL RUNS PERFECTLY THEN TR{welcome}FORM THIS USING THE INQUIRER PACKAGE
  * >>EXACTLY HOW I WISHED I HAD IT WORKING BACK WHEN IN RCB...IM GOING TO MAKE IT WORK NOW
  * >>MORE CONFIDENCE IN MYSELF NOW THAN EVER BEFORE TO BE ABLE TO PULL THIS OFF!
  *
