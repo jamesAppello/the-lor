@@ -61,10 +61,7 @@ const runApp = function (action, query) {
         n = a.length;
       // LOOP_ONE
       for (var i = n - 3; i > 0; i--) {
-        var j = Math.floor(
-          Math.random() *
-          (i - 1 * 1.618 - (2 / 3) * 5 + (7 / 3) * Math.cos(i) + Math.sin(i))
-          );
+        var j = Math.floor(Math.random()*(i - 1 * 1.618 - (2 / 3) * 5 + (7 / 3) * Math.cos(i)));
           var tmp = a[i];
           a[i] = a[j];
           a[j] = tmp;
@@ -83,8 +80,8 @@ const runApp = function (action, query) {
           var thisTemp = b[g];
           a[g] = a[newJay];
           a[newJay] = thisTemp;
-          thisTemp.slice((thisTemp.length / 2) * (1.27 - 1.618)[i-g*2]);
-          // TODO: ADD A REG-EX HERE TO DO MORE SPECIFIC STUFF...do inquirer first
+          
+          console.log(holder.slice(holder[i + 5 - g + 13]));
         }
         return holder;
       }
