@@ -15,42 +15,16 @@ const alpha = require("alphavantage")({
   key: process.env.ALPHAVANTAGE_API_KEY,
 });
 
-/**
- * GIVENS:
- * - arg-one
- * - arg-two:: can be multi-word IFF encap'd >> ""
- * -----------------------------------------------
- * TODOS:
- * * IFF you want to rebuild version1(LIRI) && just clean it up *
- * * ELSE do different outcomes for cli args *
- * * :|:?WHAT_THO?:|:(K.I.S.S)=> 3 actions    *
- * ==========================================
- * CHECKLIST:
- * <get-stock-data> :: works ****** go back to make the displayed output look more pristine
- * <hash-this-string>:: IN_PROGRESS << " so far I have the string query pushed into an empty array; then have split the querySTR into individual indexes "
- * <ef-es>:: NOT_STARTED:: << deciding the best optimal approach to write/read/append-File method.....BECAUSE INQUIRER WILL HELP ME WITH MAKING THAT LOOK AMAING!
- * ==========================================
- * @-the MAIN:<:< function (action, query){
- * SWITCH<~>action
- *      1~>>> look up stock data << "get-stock-data"
- * ===================================================~~~~~~~~~~~~~~~
- *      2~>>> password-hasher-generator << "hash-this-string"
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *      3~>>> fs-module-method to create/read/delete file << "ef-es"
- * ==================================================================
- * }
- */
-
-
+// WELCOME to The Lor !
 inquirer.prompt({
   name:"welcome",
   type:"list",
-  message:"Welcome to The Lor!\n...\nWHAT COULD I DO FOR YOU TODAY?",
+  message:"Welcome to 'The Lor'\n...\nWHAT COULD I DO FOR YOU TODAY?",
   choices:["get-stock-data", "hash-this-string", "ef-es"]
 }).then(ans => {
   console.log(ans);
   /**
-   * TODO:
+   * 
    * 1. pass the result of the welcome as argONE
    * *********
    * 2. depending on THAT_OUTOME << exec << {
@@ -108,13 +82,55 @@ inquirer.prompt({
         choices: ["Write a message!", "Make a List", "Read the list!"]
       }).then(ansTWO => {
         inqACTION = ansTWO.crud;
-        runApp(inqCHOICE, inqACTION);
-      });
+        /**
+         * atTHISpoint:>:> the cbMTHD returns the value of the selected action from the [crud-choics]
+         * e.g. - '[n]' selected outputs the selection as the message
+         * *********
+         * TODO:
+         * 1. we need to add a new prompt based on what option is selected
+         * *however: WE SHOULD LOOK AT THE METHOD BEING CALLED FROM THE SWITCH IN THE RUNAPP METHOD
+         * ... BECAUSE WE MAY HAVE TO ISOLATE THE THAT SWITCH INTO 3 INDIVIDUAL MEDTHODS
+         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * NOTES:
+         * what does "ef-es" do?
+         * ef-es: first takes the action("ef-es") and the query-action(being the message input by user)
+         *        then writes the stringArg into a file >> "writeFileMethod_txtOUTPUT.txt"
+         *        @ the same time it reads /THAT\-file (* BUT WE CONSOLE LOGGED IT OUT BECAUSE YOU JUST NEED TO GO TO THE FILE TO READ IT *)
+         *        && appends the inputfromuser to another file called "theList.txt" 
+         * SO:
+         * what do we have to change in order to make this the most optimal outcome?
+         * --------
+         * GIVENS:
+         * when prompted at "welcome" if selected "ef-es" a second prompt will show up asking what you want to do.
+         * >>> rn inqAction === ansTWO.crud
+         * -------
+         * STRATEGY:
+         * based on that outome we should use another switch on the inqACTION variable:
+         * if inqACTION = 
+         *        "Write a message!" << ' new prompt for what you want to write ' && maybe:?:make a shuffle of the message an optional suffix-mthd
+         *        "Make a List" << ' new prompt for making the list/adding to that list '
+         *            ** 
+         *         ->    IT WOULD BE A CHERRY ON TOP TO EXTEND THAT CASE MORE FOR ASKING WHAT IS YOUR MAIN TASK 
+         *         ->    AND FOLLOWED BY THE ESSENTIAL GIVEN STEPS TO AHCIEVE THAT GOAL, 
+         *         ->    AND SET DEADLINES FOR EACH AND MAKE A POINTS SYSTEM AS A RWARD INCEPTIVE OF PODUCTIVITY 
+         *            **
+         * 
+         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * ========= >>>>>>>>> " when this is all done we will move out the 'helper functions into another file' << 'modularization' "
+         */
+
+
+
+
+        // ============ RUN THE METHOD ==============
+        // runApp(inqCHOICE, inqACTION);
+      }).catch(err => { if (err) throw err });
       break;    
   }
 })
 
-// MAIN
+
+// MAIN_METHOD
 // I::>
 // define method
 const runApp = function (action, query) {
