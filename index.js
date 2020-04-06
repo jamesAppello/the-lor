@@ -81,7 +81,6 @@ inquirer.prompt({
         type: "list",
         choices: ["Write a message!", "Make a List", "Read the list!"]
       }).then(ansTWO => {
-        inqACTION = ansTWO.crud;
         /**
          * atTHISpoint:>:> the cbMTHD returns the value of the selected action from the [crud-choics]
          * e.g. - '[n]' selected outputs the selection as the message
@@ -118,7 +117,34 @@ inquirer.prompt({
          * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          * ========= >>>>>>>>> " when this is all done we will move out the 'helper functions into another file' << 'modularization' "
          */
+        // moved the decision from the list into a variable instead
+        const crudListChoice = ansTWO.crud;
+        //switch<~>crudListChoice
+        switch(crudListChoice) {
+          case "Write a message!":
+              // console.log("---> HAVE THE USER INPUT THEIR MESSAGE <---");
+              inquirer.prompt({
+                name: "writemsg",
+                message: "WHAT DO YOU WANT TO SAY?"
+              }).then(resp => {
+                inqACTION = resp.writemsg;
 
+                console.log(inqCHOICE, `"${inqACTION}"`);
+                runApp(inqCHOICE, `"${inqACTION}"`);
+
+              }).catch(err => {
+                if (err) throw err
+              });   
+            break;
+          case "Make a List":
+            console.log("---> ASK USER FOR THE LABEL OF THEIR LISTTHEN THEY CAN PUT IN THEIR ITEMS...HAVE THEM CONFIRM IF THEY ARE DONE WITH THE LIST...THEN EXECUTE THE CREATION OF THE LIST <---");
+            break;
+          case "Read the list!":
+            console.log("---> LIST TO SHOW FILES TO READ....OR TO KEEP IT SHORT && SIMPLE:JUST READ THE USERS LIST <---")
+            // make sure to >|>dlt>|> ef-es >> output file "theList.txt" << "lorlog.txt"
+            break;    
+        }
+        
 
 
 
@@ -167,7 +193,7 @@ const runApp = function (action, query) {
           );
           var thisTemp = b[g];
           a[g] = a[newJay];
-          a[newJay] = thisTemp;
+          a[newJay] = thisTemp; 
           console.log(holder.slice(holder[i + 5 - g + 13]));
         }
         return holder;
@@ -175,7 +201,9 @@ const runApp = function (action, query) {
       break;
 
     case "ef-es":
+      
       console.log("CRUD_FILE-SYSTEM_METHOD");
+
       // writeFile
       fs.writeFile("writeFileMethod_txtOUTPUT.txt", query, (k) => {
         if (k) {
@@ -191,6 +219,7 @@ const runApp = function (action, query) {
         //   INPUTdata: query
         // })
       });
+
       // readFile
       fs.readFile("writeFileMethod_txtOUTPUT.txt", "utf-8", (k, d) => {
         if (k) throw k;
@@ -198,9 +227,10 @@ const runApp = function (action, query) {
         //   msgINfile: d
         // });
       });
+
       // appendFile
       const fourApnd = query + "\n";
-      fs.appendFile("theList.txt", fourApnd, (k) => {
+      fs.appendFile("lorlog.txt", fourApnd, (k) => {
         if (k) console.log(k);
         console.log("....\ngo take a look over there!");
       });
