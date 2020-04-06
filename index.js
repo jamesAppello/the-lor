@@ -158,7 +158,6 @@ const runApp = function (action, query) {
           
           let holder = [];
           holder.push(list);
-          
           console.log(`====================\n----NEW_PASSWORD----\n${holder}`);
           // we need to have another loop that takes result of LOOP_ONE >> LOOP_TWO|<holder.length>:{IN}|~|{OUT}:<"shuffle again">}|
         for (let g = holder.length - 3; g > 0; i--) {
@@ -169,7 +168,6 @@ const runApp = function (action, query) {
           var thisTemp = b[g];
           a[g] = a[newJay];
           a[newJay] = thisTemp;
-          
           console.log(holder.slice(holder[i + 5 - g + 13]));
         }
         return holder;
