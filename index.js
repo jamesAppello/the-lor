@@ -21,7 +21,7 @@ inquirer
     name: "welcome",
     type: "list",
     message: "Welcome to 'The Lor'\n...\nWHAT COULD I DO FOR YOU TODAY?",
-    choices: ["get-stock-data", "hash-this-string", "ef-es"],
+    choices: ["get_a_fucking_job", "get-stock-data", "hash-this-string", "ef-es"],
   })
   .then((ans) => {
     console.log(ans);
@@ -42,6 +42,22 @@ inquirer
      */
     let inqCHOICE, inqACTION;
     switch (ans.welcome) {
+      case "get_a_fucking_job":
+        // console.log("GET A FUCKING JOB YOU LAZY BASTARD!!!")
+        var githubURL = 'https://jobs.github.com/positions.json?description=javascript&page=1'
+        axios.default.get(githubURL).then(res => {
+          // THIS IS EXTRATED FROM A SINGLE DATA OBJECT TO SEE WHAT DATA IS IN EACH POSTING
+          // loop thru all objects and output what you see below for each i in the loop.
+          // // FLOOP>~START/
+          // var main_jawn = res.data;
+          // console.log(`------------------\nJAVASCRIPT JOB_QUERY SERACH >> GITHUB\n\n-------------------------\n`)
+        
+          // // FLOOP>~END\
+          // console.log(main_jawn.length)
+          console.log(res.data[47]);
+          // console.log(`__________________\nURL: ${res.data[0].url}\n_________________\nLOCATION: ${res.data[0].location}\n___________________\nJOB_DESCRIPTON: ${res.data[0].description}`)
+        })
+        break;
       case "get-stock-data":
         // console.log("stocks");
         inqCHOICE = "get-stock-data";
