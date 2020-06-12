@@ -42,43 +42,7 @@ inquirer
      */
     let inqCHOICE, inqACTION;
     switch (ans.welcome) {
-      case "get_a_fucking_job":
-        // console.log("GET A FUCKING JOB YOU LAZY BASTARD!!!")
-        var githubURL = 'https://jobs.github.com/positions.json?description=javascript&page=1'
-        axios.default.get(githubURL).then(res => {
-          // THIS IS EXTRATED FROM A SINGLE DATA OBJECT TO SEE WHAT DATA IS IN EACH POSTING
-          // loop thru all objects and output what you see below for each i in the loop.
-          // // FLOOP>~START/
-          // var main_jawn = res.data;
-          // console.log(`------------------\nJAVASCRIPT JOB_QUERY SERACH >> GITHUB\n\n-------------------------\n`)
-        
-          // // FLOOP>~END\
-          // console.log(main_jawn.length)
-          console.log(res.data[47]);
-          // console.log(`__________________\nURL: ${res.data[0].url}\n_________________\nLOCATION: ${res.data[0].location}\n___________________\nJOB_DESCRIPTON: ${res.data[0].description}`)
-        })
-        break;
-      case "get-stock-data":
-        // console.log("stocks");
-        inqCHOICE = "get-stock-data";
-        console.log(inqCHOICE);
-        // IF true: ask another question to instruct user to input the company ticker symbol
-        inquirer
-          .prompt({
-            name: "msg2stk",
-            message: "Enter the ticker-symbol of the company...",
-          })
-          .then((ansTWO) => {
-            // console.log(ansTWO.msg2stk);
-            inqACTION = ansTWO.msg2stk;
-            runApp(inqCHOICE, inqACTION);
-          })
-          .catch((err) => {
-            if (err) throw err;
-          });
-
-        // runApp(inqCHOICE, inqACTION);
-        break;
+      
       case "hash-this-string":
         // console.log("password-shuffler");
         inqCHOICE = "hash-this-string";
