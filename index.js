@@ -105,7 +105,11 @@ inquirer
           .prompt({
             name: "crud",
             type: "list",
-            choices: ["Write a message!", "Make a List", "Read the list!"],
+            choices: [
+              "Write a message!", 
+              "Make a List", 
+              "Read the list!"
+            ],
           })
           .then((ansTWO) => {
             /**
