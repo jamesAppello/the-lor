@@ -1,1 +1,1 @@
-""Get shit done today""
+"the hashing function looks much better now after some reading and making a few changes"
